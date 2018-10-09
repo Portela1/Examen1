@@ -1,5 +1,6 @@
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.geom.Point2D;
 
 /*
  * Represents a rectangle by an upper-left and a lower-right points
@@ -7,11 +8,11 @@ import java.awt.Rectangle;
 public class PointRectangle {
 	
 	private Point upperLeft;
-	private Point lowerRight;
+	private Point2D lowerRight;
 	
 	//Constructors
 	
-	public PointRectangle(Point upperLeft, Point lowerRight) {
+	public PointRectangle(Point upperLeft, Point2D lowerRight) {
 		super();
 		this.upperLeft = upperLeft;
 		this.lowerRight = lowerRight;
@@ -22,7 +23,12 @@ public class PointRectangle {
 	 * parameter rectangle.
 	 */
 	public PointRectangle(Rectangle r) {
-		this.upperLeft = r.getLocation();
+		
+		this.upperLeft = new Point((int)r.getX(),(int)r.getY());
+		this.lowerRight = new Point((int)(r.getX()+r.getWidth()),(int) (r.getY()+r.getHeight()));
+		
+		
+		
 		
 	
 		
@@ -32,11 +38,11 @@ public class PointRectangle {
 	//Getters
 
 	public Point getUpperLeft() {
-		return upperLeft;
+		return (Point) upperLeft;
 	}
 
 	public Point getLowerRight() {
-		return lowerRight;
+		return (Point) lowerRight;
 	}
 	
 	//Setters
@@ -56,8 +62,8 @@ public class PointRectangle {
 	 * and deltay units vertically. 
 	 */
 	public void translate(int deltax, int deltay) {
-		this.upperLeft.translate(deltax, deltay);
-		this.lowerRight.translate(deltax, deltay);
+		((Point) this.upperLeft).translate(deltax, deltay);
+		((Point) this.lowerRight).translate(deltax, deltay);
 		
 		
 	}
@@ -97,12 +103,19 @@ public class PointRectangle {
 	 * should work.
 	 */
 	public PointRectangle halfByWidth() {
-		Point NP = this.lowerRight;
-		int tr = 0;
-		tr = (NP.x/2)*-1;
-		NP.translate(tr, 0);
 		
-		return new PointRectangle(this.upperLeft,NP);
+		Point ul = new Point((int)(this.upperLeft.getX()),(int)(this.upperLeft.getY()));
+		
+		Point2D lr  = new Point((int)(this.lowerRight.getX()),(int)(this.lowerRight.getY()));
+		
+		lr.setLocation(lr.getX()/2.0,lr.getY());
+		
+		
+		
+		
+		
+		
+		return new PointRectangle( ul, lr);
 		
 	}
 }

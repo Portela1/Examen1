@@ -48,6 +48,12 @@ public class Wallet {
 	 * number of dollars received as a parameter
 	 */
 	public Wallet(int dollars) {
+		this.hundreds = dollars/100;
+		this.twenties = dollars%100/20;
+		this.tens= dollars%100%20/10;
+		this.fives = dollars%100%20%10/5;
+		this.ones = dollars%100%20%10%5/1;
+		
 		
 
 		
@@ -77,8 +83,15 @@ public class Wallet {
 	 */
 	public Wallet add(Wallet w2) {
 		this.ones+=w2.ones;
+		this.fives+=w2.fives;
+		this.tens+=w2.tens;
+		this.twenties+=w2.twenties;
+		this.hundreds+=w2.hundreds;
 		
-		return new Wallet(this.ones+=w2.ones,this.fives+=w2.fives,this.tens+=w2.tens,this.twenties+=w2.twenties,this.hundreds+=w2.hundreds); 
+		return this;
+		
+		
+		 
 	}
 
 	/*
@@ -86,18 +99,12 @@ public class Wallet {
 	 * the amount of money represented by the dollars parameter
 	 */
 	public Wallet add(int dollars) {
-		int hun = 0;
-		int tw = 0;
-		int ten = 0;
-		int five = 0;
-		int one = 0;
-		
-		hun += this.hundreds + ((this.ones/100) + (this.twenties*20/100) + (this.tens*10/100) + (this.fives*5/100));
-		tw += (this.twenties*20%100/20) + ((this.ones%100/20)  + (this.tens*10%100/20) + (this.fives*5%100/20));
-		ten += (this.tens*10%100%20/10) + ((this.ones%100%20/10) + (this.fives*5%100/10));
-		five += (this.fives*5%100%10/5) + (this.ones%100%20%10/5);
-		one += (this.ones%100%20%10%5);
-		return new Wallet(one,five,ten,tw,hun);
+		this.hundreds = dollars/100;
+		this.twenties = dollars%100/20;
+		this.tens= dollars%100%20/10;
+		this.fives = dollars%100%20%10/5;
+		this.ones = dollars%100%20%10%5/1;
+		return this;
 	}
 
 	/*
@@ -105,31 +112,18 @@ public class Wallet {
 	 * number of bills
 	 */
 	public Wallet minimize() {
-		int hun = 0;
-		int tw = 0;
-		int ten = 0;
-		int five = 0;
-		int one = 0;
+		int dollars = this.hundreds*100+this.twenties*20+this.tens*10+this.fives*5+this.ones;
 		
-		hun += this.hundreds + ((this.ones/100) + (this.twenties*20/100) + (this.tens*10/100) + (this.fives*5/100));
-		tw += (this.twenties*20%100/20) + ((this.ones%100/20)  + (this.tens*10%100/20) + (this.fives*5%100/20));
-		ten += (this.tens*10%100%20/10) + ((this.ones%100%20/10) + (this.fives*5%100/10));
-		five += (this.fives*5%100%10/5) + (this.ones%100%20%10/5);
-		one += (this.ones%100%20%10%5);
-		return new Wallet(one,five,ten,tw,hun);
+		this.hundreds = dollars/100;
+		this.twenties = dollars%100/20;
+		this.tens= dollars%100%20/10;
+		this.fives = dollars%100%20%10/5;
+		this.ones = dollars%100%20%10%5/1;
+		
+		
+		
+		return this;
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

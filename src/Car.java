@@ -43,6 +43,7 @@ public class Car {
 	 * Get total gallons consumed by target Car in last trip
 	 */
 	public double getTripGasConsumed() {
+		this.tripGasConsumed=(this.tripMileage/this.milesPerGallon);
 		return tripGasConsumed;
 	}
 	
@@ -67,9 +68,10 @@ public class Car {
 	 * the gas consumed by the target Car to travel the argument miles.
 	 */
 	public void addMiles(double miles) {
+		this.tripMileage+=miles;
         this.mileage+=miles;
-        this.tripMileage+=miles;
-        this.gasInTank = this.gasInTank - (1.0/this.milesPerGallon)*miles;
+        this.gasInTank-=(miles/this.milesPerGallon);
+   
 	}
 	
 	/*
@@ -78,8 +80,7 @@ public class Car {
 	 * in this trip.
 	 */
 	public double getTripMilesPerGallon() {
-		resetTrip();
-		return (this.tripMileage/this.tripGasConsumed);
+		return milesPerGallon;
 	     
 	}
 	
@@ -91,7 +92,7 @@ public class Car {
 	 *      new average = (previous average + (new average * 2))/3
 	 */
 	public void refineMPG() {
-		// YOUR CODE HERE
+		
 	}
 	
 	/*

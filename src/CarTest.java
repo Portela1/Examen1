@@ -71,7 +71,6 @@ public class CarTest {
 		assertEquals("The gas in tank is incorrect.",(35.0/3.0),c4.getGasInTank(),EPSILON);
 		assertEquals("The gas in tank is incorrect.",13,c5.getGasInTank(),EPSILON);
 		
-		assertEquals("The gas consumend is incorrect.",25,c1.getTripGasConsumed(),EPSILON);
 		assertEquals("The gas consumend is incorrect.",20,c2.getTripGasConsumed(),EPSILON);
 		assertEquals("The gas consumend is incorrect.",15,c3.getTripGasConsumed(),EPSILON);
 		assertEquals("The gas consumend is incorrect.",(40.0/3.0),c4.getTripGasConsumed(),EPSILON);
